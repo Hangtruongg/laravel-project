@@ -8,7 +8,7 @@
     </h2>
 
     <ul class="space-y-3">
-        @foreach ($tasks as $task)
+        @forelse ($tasks as $task)
             <li class="flex items-center justify-between bg-gray-50 px-4 py-3 rounded-lg hover:bg-gray-100 transition">
                 <div class="flex items-center space-x-3">
                     {{-- Complete checkbox --}}
@@ -41,6 +41,10 @@
                     </button>
                 </form>
             </li>
-        @endforeach
+            @empty
+            <li class="flex items-center justify-center text-gray-500 italic py-6">
+                No tasks yet
+            </li>
+        @endforelse
     </ul>
 </div>
