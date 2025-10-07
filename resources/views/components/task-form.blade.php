@@ -5,7 +5,7 @@
         <h2 class="text-base font-semibold text-gray-800">New Task</h2>
         <div>
             <label for="text" class="sr-only">Task</label>
-            <textarea type="text" rows="2" id="text" name="text" placeholder="What do yuo want to do?"
+            <textarea type="text" rows="2" id="text" name="text" placeholder="What do you want to do?"
                 class="block w-full resize-none border-0 py-0 text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm sm:leading-6"></textarea>
         </div>
         <div class="flex justify-between items-center">
