@@ -10,11 +10,11 @@ class TaskController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'text' => 'required|string|max:255',
+            "text" => "required|string|max:255",
         ]);
 
         $task = Task::create([
-            'text' => $request->text,
+            "text" => $request->text,
         ]);
 
         return redirect()->back();
@@ -22,7 +22,9 @@ class TaskController extends Controller
 
     public function complete(Task $task)
     {
-        // TODO complete task
+        $task->update([
+            'completed' => !$task->completed, 
+        ]);
 
         return redirect()->back();
     }
