@@ -1,9 +1,10 @@
-@props(['tasks', 'totalTasks'])
+@props(['tasks', 'inProgressCount'])
+
 <div class="mt-6 bg-white shadow-md rounded-xl p-6 max-w-3xl mx-auto">
     <h2 class="text-2xl font-semibold text-gray-800 mb-4 flex items-end">
-        <span>Tasks</span>
+        <span>To-do Tasks</span>
         <span class="text-xs text-gray-500 bg-gray-100 px-2 py-0.5 rounded-full ml-2 self-end">
-            {{ $totalTasks ?? 0 }}
+            {{ $inProgressCount ?? 0 }}
         </span>
     </h2>
 
@@ -22,7 +23,7 @@
                     </form>
 
                     {{-- Task text --}}
-                    <span class="text-gray-800 {{ $task->completed ? 'line-through text-gray-400' : '' }}">
+                    <span class="text-gray-800">
                         {{ $task->text }}
                     </span>
                 </div>
@@ -43,7 +44,7 @@
             </li>
         @empty
             <li class="flex items-center justify-center text-gray-500 italic py-6">
-                No tasks yet
+                No tasks in progress
             </li>
         @endforelse
     </ul>
