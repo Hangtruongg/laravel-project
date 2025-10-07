@@ -1,18 +1,8 @@
-@props(['tasks', 'totalTasks'])
-
-@php
-    $priorityOrder = ['high', 'medium', 'low', null];
-    $tasks = $tasks->sortBy(function ($task) use ($priorityOrder) {
-        // Tasks with no priority get last
-        return array_search($task->priority, $priorityOrder);
-    });
-@endphp
-
 <div class="mt-6 bg-white shadow-md rounded-xl p-6 max-w-3xl mx-auto">
     <h2 class="text-2xl font-semibold text-gray-800 mb-4 flex items-end">
-        <span>Tasks</span>
+        <span>Tasks with priority: {{ ucfirst($priority) }}</span>
         <span class="text-xs text-gray-500 bg-gray-100 px-2 py-0.5 rounded-full ml-2 self-end">
-            {{ $totalTasks ?? 0 }}
+            {{ $tasks->count() }}
         </span>
     </h2>
 
@@ -57,7 +47,7 @@
                     @method('DELETE')
                     @csrf
                     <button type="submit"
-                        class="flex items-center justify-center w-5 h-5 rounded-full bg-red-100 text-black-600 hover:bg-red-200 transition"
+                        class="flex items-center justify-center w-5 h-5 rounded-full bg-red-100 text-red-600 hover:bg-red-200 transition"
                         title="Delete task">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
                             stroke="currentColor" class="w-4 h-4">
@@ -68,7 +58,7 @@
             </li>
         @empty
             <li class="flex items-center justify-center text-gray-500 italic py-6">
-                No tasks yet
+                No tasks found for this priority
             </li>
         @endforelse
     </ul>

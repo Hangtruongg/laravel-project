@@ -26,43 +26,13 @@ Route::post("/tasks/{task}/complete", [TaskController::class, "complete"]);
 
 Route::delete("/tasks/{task}", [TaskController::class, "destroy"]);
 
-Route::get("/", function () {
-    $totalTasks = Task::count();
-    $completedCount = Task::where("completed", true)->count();
-    $tasks = Task::where("completed", false)->get();
-    $inProgressCount = Task::where("completed", false)->count();
+Route::get('/', [TaskController::class, 'index'])->name('tasks.index');
 
-    return view(
-        "welcome",
-        compact("tasks", "totalTasks", "completedCount", "inProgressCount")
-    )->with("activeTab", "all");
-})->name("tasks.index");
+Route::get('/completed', [TaskController::class, 'completed'])->name('tasks.completed');
 
-Route::get("/completed", function () {
-    $totalTasks = Task::count();
-    $completedCount = Task::where("completed", true)->count();
-    $tasks = Task::where("completed", true)->get();
-    $inProgressCount = Task::where("completed", false)->count();
+Route::get('/inProgress', [TaskController::class, 'inProgress'])->name('tasks.inProgress');
 
-    return view(
-        "welcome",
-        compact("tasks", "totalTasks", "completedCount", "inProgressCount")
-    )->with("activeTab", "completed");
-})->name("tasks.completed");
+Route::delete("/tasks/completed/delete-all", [TaskController::class, "deleteAllCompleted"])->name("tasks.deleteAllCompleted");
 
-Route::get("/inProgress", function () {
-    $totalTasks = Task::count();
-    $inProgressCount = Task::where("completed", false)->count();
-    $tasks = Task::where("completed", false)->get();
-    $completedCount = Task::where("completed", true)->count();
+Route::get('/tasks/priority/{priority}', [TaskController::class, 'priority'])->name('tasks.priority');
 
-    return view(
-        "welcome",
-        compact("tasks", "totalTasks", "inProgressCount", "completedCount")
-    )->with("activeTab", "inProgress");
-})->name("tasks.inProgress");
-
-Route::delete("/tasks/completed/delete-all", [
-    TaskController::class,
-    "deleteAllCompleted",
-])->name("tasks.deleteAllCompleted");

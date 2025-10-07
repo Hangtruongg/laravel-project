@@ -52,7 +52,8 @@
             bg-white/10 backdrop-blur-md border border-white/20">
                 <!-- Sidebar -->
                 <aside class="w-64 bg-gray-50 p-6 border-r">
-                    <x-task-bar :task="$tasks" :totalTasks="$totalTasks" :completedCount="$completedCount" :inProgressCount="$inProgressCount" />
+                    <x-task-bar :task="$tasks" :totalTasks="$totalTasks" :completedCount="$completedCount" :inProgressCount="$inProgressCount"
+                        :activeTab="$activeTab" :highCount="$highCount" :mediumCount="$mediumCount" :lowCount="$lowCount" />
                 </aside>
 
                 <!-- Main content -->
@@ -65,6 +66,8 @@
                         <x-task-in-progress :tasks="$tasks" :inProgressCount="$inProgressCount" />
                     @elseif($activeTab === 'completed')
                         <x-task-completed :tasks="$tasks" :completedCount="$completedCount" />
+                    @elseif($activeTab === 'priority')
+                        <x-task-priority :priority="$activePriority" />
                     @endif
                 </main>
             </div>
